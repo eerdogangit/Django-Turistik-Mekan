@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>ilk django sayfası</title>
-</head>
-<body>
-<h1>hoş geldin django</h1>
-<h3>engin erdoğan</h3>
-<p>
-    {{ text }}
-</p>
-</body>
-</html>
+{% extends "homebase.html"%}
+
+{% block title %} {{setting.title}} {% endblock %}
+{% block keywords %} {{setting.keywords}} {% endblock %}
+{% block description %} {{setting.description}} {% endblock %}
+{% block head %}
+    <link rel="icon" href='{{setting.icon.url}}' type="image/x-icon">
+{% endblock %}
+
+
+{% block content %}
+    {% include "content.html" %}
+{% endblock %}
