@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from django.utils.safestring import mark_safe
+from ckeditor_uploader.fields import RichTextUploadingField
+
 # Create your models here.
 class Category(models.Model):
     STATUS = (
@@ -21,6 +24,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+    def image_tag(self):
+        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+    image_tag.short_description = 'Image'
 
 class Sehir(models.Model):
     STATUS = (
@@ -57,7 +64,7 @@ class Place(models.Model):
     keywords = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     image = models.ImageField(blank=True, upload_to='placeimages/')
-    detail = models.TextField()
+    detail = RichTextUploadingField()
     slug = models.SlugField(blank=True)
 
     sehir = models.ForeignKey(Sehir, on_delete=models.CASCADE, blank=True, null=True)
@@ -77,6 +84,11 @@ class Place(models.Model):
     def __str__(self):
         return self.title
 
+    def image_tag(self):
+        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+
+    image_tag.short_description = 'Image'
+
 class Images(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE)
     title = models.CharField(max_length=255, blank=True)
@@ -85,6 +97,6 @@ class Images(models.Model):
     def __str__(self):
         return self.title
 
-    #def image_tag(self):
-    #    return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
-    #image_tag.short_description = 'Image'
+    def image_tag(self):
+        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+    image_tag.short_description = 'Image'
