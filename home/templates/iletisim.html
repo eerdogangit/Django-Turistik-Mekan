@@ -15,10 +15,10 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Referanslar</h2>
+                        <h2>İletişim</h2>
                         <div class="breadcrumb__option">
                             <a href="/"><i class="fa fa-home"></i> Ana Sayfa</a>
-                            <span>Referanslar</span>
+                            <span>İletişim</span>
                         </div>
                     </div>
                 </div>
@@ -42,41 +42,35 @@
                 <div class="col-lg-4 col-md-4">
                     <div class="contact__widget">
                         <div class="contact__widget__address">
-                            <h4>Contact Us</h4>
+                            <h4>İletişim Bilgileri</h4>
                             <ul>
-                                <li><i class="fa fa-send"></i> 40 Baria Sreet 133/2 NewYork City</li>
-                                <li><i class="fa fa-envelope"></i> hello@atheme.com</li>
-                                <li><i class="fa fa-phone"></i> +88-111-555-666</li>
-                            </ul>
-                        </div>
-                        <div class="contact__widget__time">
-                            <h4>Opening Hours</h4>
-                            <ul>
-                                <li><i class="fa fa-clock-o"></i> Mon - Fri: 6:30am - 07:45pm</li>
-                                <li><i class="fa fa-clock-o"></i> Sat - Sun: 8:30am - 05:45pm</li>
+                                <li><i class="fa fa-send"></i> {{setting.address | safe}}</li>
+                                <li><i class="fa fa-envelope"></i> {{setting.email | safe}}</li>
+                                <li><i class="fa fa-phone"></i> {{setting.phone | safe}}</li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8">
-                    <form action="#" class="contact__form">
+                    <form action="" method="post" class="contact__form">
+                        {% csrf_token %}
                         <div class="row">
-                            <div class="col-lg-6 col-md-6">
-                                <input type="text" placeholder="First Name">
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <input type="text" placeholder="Last Name">
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <input type="text" placeholder="Your Email">
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <input type="text" placeholder="Phone Number">
-                            </div>
+                            {% for field in form %}
+                                <div class="col-lg-6 col-md-6">
+                                    {{field}}
+                                </div>
+                            {% endfor %}
                         </div>
-                        <textarea placeholder="Message"></textarea>
+
                         <button type="submit" class="site-btn">GÖNDER</button>
                     </form>
+                    <div class="text-center">
+                        {% if messages %}
+                            {% for message in messages %}
+                                {{message}}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

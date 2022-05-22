@@ -35,3 +35,33 @@ class Setting(models.Model):
 
     def __str__(self):
         return self.title
+class ContactFormMessage(models.Model):
+    STATUS = (
+        ('New', 'New'),
+        ('Read', 'Read'),
+        ('Closed', 'Closed'),
+    )
+    firstname = models.CharField(blank=True, max_length=255)
+    lastname = models.CharField(blank=True, max_length=255)
+    email = models.CharField(blank=True, max_length=255)
+    phone = models.CharField(blank=True, max_length=255)
+    message = models.CharField(blank=True, max_length=255)
+    status = models.CharField(max_length=10, choices=STATUS)
+    ip = models.CharField(blank=True, max_length=255)
+    note = models.CharField(blank=True, max_length=255)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.firstname
+class ContactFormu(ModelForm):
+    class Meta:
+        model = ContactFormMessage
+        fields = ['firstname', 'lastname', 'email', 'phone', 'message']
+        widgets = {
+            'firstname': TextInput(attrs={'placeholder':'Ad'}),
+            'lastname': TextInput(attrs={'placeholder': 'Soyad'}),
+            'email': TextInput(attrs={'placeholder': 'E-Posta Adresi'}),
+            'phone': TextInput(attrs={'placeholder': 'Telefon Numarası'}),
+            'message': Textarea(attrs={'placeholder': 'Mesaj'}),
+        }
