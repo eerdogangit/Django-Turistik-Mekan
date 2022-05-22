@@ -12,15 +12,15 @@ from place.models import Place, Category, Images
 
 def index(request):
     setting = Setting.objects.get(pk=1)
-    #sliderdata = Place.objects.all()[:3]
+    sliderdata = Place.objects.all()[:3]
     category = Category.objects.all()
     places = Place.objects.all().order_by('-id')[:12]
 
     context = {'setting': setting,
                'category': category,
                'page': 'home',
-               #'sliderdata': sliderdata,
-               'rents': places
+               'sliderdata': sliderdata,
+               'places': places
                }
     return render(request, 'index.html', context)
 
