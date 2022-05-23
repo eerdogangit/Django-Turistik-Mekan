@@ -31,11 +31,13 @@
                     </div>
                     <div class="categories__item__list">
                         {% for rs in category %}
+                        <a href="/category/{{ rs.id }}/{{ rs.slug }}">
                         <div class="categories__item">
                             <img src="{{ rs.image.url }}" alt="">
                             <h5>{{ rs.title }}</h5>
                             <span>78 Listings</span>
                         </div>
+                        </a>
                         {% endfor %}
                     </div>
                 </div>

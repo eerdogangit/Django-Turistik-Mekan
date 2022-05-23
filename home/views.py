@@ -6,7 +6,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 #from home.forms import SearchForm, SignUpForm
-#from home.models import Setting, ContactFormMessage, Profile, Faq
 from home.models import Setting, ContactFormu, ContactFormMessage
 from place.models import Place, Category, Images
 
@@ -62,3 +61,34 @@ def iletisim(request):
                'category': category,
                'page':'iletisim'}
     return render(request, 'iletisim.html', context)
+
+def category(request, id, slug):
+    rents = Place.objects.get(category=id)
+    context = {'places': rents}
+    return render(request, 'places.html', context)
+
+def category_places(request, id, slug):
+    category = Category.objects.all()
+    categoryData = Category.objects.get(pk=id)
+    places = Place.objects.filter(category_id=id)
+    setting = Setting.objects.get(pk=1)
+    context = {'setting': setting,
+               'page': 'places',
+               'places': places,
+               'category': category,
+               'categoryData': categoryData
+               }
+    return render(request, 'places.html', context)
+
+def place_detail(request, id, slug):
+    setting = Setting.objects.get(pk=1)
+    place = Place.objects.get(pk=id)
+    images = Images.objects.filter(rent_id=id)
+    context = {'setting': setting,
+               'place': place,
+               'images': images
+               }
+    return render(request, 'place_detail.html', context)
+
+
+

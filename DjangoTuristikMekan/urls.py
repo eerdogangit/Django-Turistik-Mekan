@@ -28,6 +28,10 @@ urlpatterns = [
     path('place/', include('place.urls')),
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('category/<int:id>/<slug:slug>/', views.category_places, name='category_places'),
+    path('place/<int:id>/<slug:slug>/', views.place_detail, name='place_detail')
+
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
