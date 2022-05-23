@@ -1,0 +1,296 @@
+{% extends "homebase.html"%}
+
+{% block title %} Detay Sayfası -- {{setting.company}} {% endblock %}
+{% block keywords %} {{setting.keywords}} {% endblock %}
+{% block description %} {{setting.description}} {% endblock %}
+{% block head %}
+    <link rel="icon" href='{{setting.icon.url}}' type="image/x-icon">
+{% endblock %}
+
+{% block content %}
+{% load static %}
+    <!-- Listing Section Begin -->
+    <section class="listing-hero set-bg" data-setbg="{% static 'img/listing/details/listing-hero.jpg'%}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="listing__hero__option">
+                        <div class="listing__hero__icon">
+                            <img src="{% static 'img/listing/details/ld-icon.png'%}" alt="">
+                        </div>
+                        <div class="listing__hero__text">
+                            <h2>{{place.title}}</h2>
+                            <div class="listing__hero__widget">
+                                <div class="listing__hero__widget__rating">
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star-half_alt"></span>
+                                </div>
+                                <div>120 Yorum</div>
+                            </div>
+                            <p><span class="icon_pin_alt"></span> {{place.adres}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="listing__hero__btns">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Listing Section End -->
+
+    <!-- Listing Details Section Begin -->
+    <section class="listing-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="listing__details__text">
+                        <div class="listing__details__about">
+                            <h4>Kısa Detay</h4>
+                            {{place.detail | safe }}
+                        </div>
+                        <div class="listing__details__gallery">
+                            <h4>Galeri</h4>
+                            <div class="listing__details__gallery__pic">
+                                <div class="listing__details__gallery__item">
+                                    <img class="listing__details__gallery__item__large"
+                                        src="{{ place.image.url }}" alt="">
+                                    <span><i class="fa fa-camera"></i> 170 Image</span>
+                                </div>
+                                <div class="listing__details__gallery__slider owl-carousel">
+                                    {% for rs in images %}
+                                    <img data-imgbigurl="{{ rs.image.url }}"
+                                        src="{{ rs.image.url }}" alt="">
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="listing__details__amenities">
+                            <h4>Amenities</h4>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-6">
+                                    <div class="listing__details__amenities__item">
+                                        <img src="img/listing/details/amenities/ame-1.png" alt="">
+                                        <h6>Accept Credit Card</h6>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-6">
+                                    <div class="listing__details__amenities__item">
+                                        <img src="img/listing/details/amenities/ame-2.png" alt="">
+                                        <h6>Free Wifi</h6>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-6">
+                                    <div class="listing__details__amenities__item">
+                                        <img src="img/listing/details/amenities/ame-3.png" alt="">
+                                        <h6>Smoking Area</h6>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-6">
+                                    <div class="listing__details__amenities__item">
+                                        <img src="img/listing/details/amenities/ame-4.png" alt="">
+                                        <h6>Free Parking</h6>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-6">
+                                    <div class="listing__details__amenities__item">
+                                        <img src="img/listing/details/amenities/ame-5.png" alt="">
+                                        <h6>Family Friendly</h6>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-6">
+                                    <div class="listing__details__amenities__item">
+                                        <img src="img/listing/details/amenities/ame-6.png" alt="">
+                                        <h6>Coffee</h6>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-6">
+                                    <div class="listing__details__amenities__item">
+                                        <img src="img/listing/details/amenities/ame-7.png" alt="">
+                                        <h6>Massage</h6>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-6">
+                                    <div class="listing__details__amenities__item">
+                                        <img src="img/listing/details/amenities/ame-8.png" alt="">
+                                        <h6>Coupons</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="listing__details__rating">
+                            <h4>Puanlama</h4>
+                            <div class="listing__details__rating__overall">
+                                <h2>4.7</h2>
+                                <div class="listing__details__rating__star">
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                    <span class="icon_star"></span>
+                                </div>
+                                <span>(120 Oylama)</span>
+                            </div>
+                            <div class="listing__details__rating__bar">
+                                <div class="listing__details__rating__bar__item">
+                                    <span>4.4</span>
+                                    <div id="bar1" class="barfiller">
+                                        <span class="fill" data-percentage="100"></span>
+                                    </div>
+                                    <span class="right">Kalite</span>
+                                </div>
+                                <div class="listing__details__rating__bar__item">
+                                    <span>3.9</span>
+                                    <div id="bar2" class="barfiller">
+                                        <span class="fill" data-percentage="75"></span>
+                                    </div>
+                                    <span class="right">Fiyat</span>
+                                </div>
+                                <div class="listing__details__rating__bar__item">
+                                    <span>4.2</span>
+                                    <div id="bar3" class="barfiller">
+                                        <span class="fill" data-percentage="80"></span>
+                                    </div>
+                                    <span class="right">Alan</span>
+                                </div>
+                                <div class="listing__details__rating__bar__item">
+                                    <span>4.8</span>
+                                    <div id="bar4" class="barfiller">
+                                        <span class="fill" data-percentage="80"></span>
+                                    </div>
+                                    <span class="right">Hizmet</span>
+                                </div>
+                                <div class="listing__details__rating__bar__item">
+                                    <span>4.0</span>
+                                    <div id="bar5" class="barfiller">
+                                        <span class="fill" data-percentage="85"></span>
+                                    </div>
+                                    <span class="right">Lokasyon</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="listing__details__comment">
+                            <h4>Yorumlar</h4>
+                            <div class="listing__details__comment__item">
+                                <div class="listing__details__comment__item__pic">
+                                    <img src="img/listing/details/comment.png" alt="">
+                                </div>
+                                <div class="listing__details__comment__item__text">
+                                    <div class="listing__details__comment__item__rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <span>March 22, 2019</span>
+                                    <h5>Marry Jane</h5>
+                                    <p>From ships to airports, museums to burger vans, from revered Michelin star
+                                        establish to the fleeting dynamism of pop-ups.</p>
+                                    <ul>
+                                        <li><i class="fa fa-hand-o-right"></i> Like</li>
+                                        <li><i class="fa fa-share-square-o"></i> Reply</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="listing__details__comment__item">
+                                <div class="listing__details__comment__item__pic">
+                                    <img src="img/listing/details/comment.png" alt="">
+                                </div>
+                                <div class="listing__details__comment__item__text">
+                                    <div class="listing__details__comment__item__rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <span>March 22, 2019</span>
+                                    <h5>Marry Jane</h5>
+                                    <p>From ships to airports, museums to burger vans, from revered Michelin star
+                                        establish to the fleeting dynamism of pop-ups.</p>
+                                    <ul>
+                                        <li><i class="fa fa-hand-o-right"></i> Like</li>
+                                        <li><i class="fa fa-share-square-o"></i> Reply</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="listing__details__comment__item">
+                                <div class="listing__details__comment__item__pic">
+                                    <img src="img/listing/details/comment.png" alt="">
+                                </div>
+                                <div class="listing__details__comment__item__text">
+                                    <div class="listing__details__comment__item__rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <span>March 22, 2019</span>
+                                    <h5>Marry Jane</h5>
+                                    <p>From ships to airports, museums to burger vans, from revered Michelin star
+                                        establish to the fleeting dynamism of pop-ups.</p>
+                                    <ul>
+                                        <li><i class="fa fa-hand-o-right"></i> Like</li>
+                                        <li><i class="fa fa-share-square-o"></i> Reply</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="listing__details__review">
+                            <h4>Yorum Ekle</h4>
+                            <form action="#">
+                                <input type="text" placeholder="Name">
+                                <input type="text" placeholder="Email">
+                                <textarea placeholder="Review"></textarea>
+                                <button type="submit" class="site-btn">Gönder</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="listing__sidebar">
+                        <div class="listing__sidebar__contact">
+
+                            <div class="listing__sidebar__contact__text">
+                                <h4>İletişim</h4>
+                                <ul>
+                                    <li><span class="icon_pin_alt"></span> {{place.adres}}</li>
+                                    <li><span class="icon_phone"></span> {{place.telefon}}</li>
+                                    <li><span class="icon_mail_alt"></span> {{place.email}}</li>
+                                    <li><span class="icon_globe-2"></span> web adresi</li>
+                                </ul>
+                                <div class="listing__sidebar__contact__social">
+                                    <a href="{{place.facebook}}"><i class="fa fa-facebook"></i></a>
+
+                                    <a href="{{place.twitter}}" class="twitter"><i class="fa fa-twitter"></i></a>
+                                    <a href="{{place.instagram}}" class="google"><i class="fa fa-google"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="listing__sidebar__working__hours">
+                            <h4>Working Hours</h4>
+                            <ul>
+                                <li>Monday <span>09:00 AM - 20:00 PM</span></li>
+                                <li>Tuesday <span>09:00 AM - 20:00 PM</span></li>
+                                <li>Wednesday <span>09:00 AM - 20:00 PM</span></li>
+                                <li>Thursday <span>09:00 AM - 20:00 PM</span></li>
+                                <li>Friday <span class="opening">Opening</span></li>
+                                <li>Saturday <span>09:00 AM - 20:00 PM</span></li>
+                                <li>Saturday <span class="closed">Closed</span></li>
+                            </ul>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Listing Details Section End -->
+{% endblock %}

@@ -83,7 +83,7 @@ def category_places(request, id, slug):
 def place_detail(request, id, slug):
     setting = Setting.objects.get(pk=1)
     place = Place.objects.get(pk=id)
-    images = Images.objects.filter(rent_id=id)
+    images = Images.objects.filter(place_id=id)
     context = {'setting': setting,
                'place': place,
                'images': images
