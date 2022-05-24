@@ -1,5 +1,21 @@
     {% load static %}
-    <!-- Hero Section Begin -->
+
+<script>
+      $(function() {
+        $("#query").autocomplete({
+          source: "/search_auto/",
+          select: function (event, ui) { //item selected
+            AutoCompleteSelectHandler(event, ui)
+          },
+          minLength: 2,
+        });
+      });
+
+      function AutoCompleteSelectHandler(event, ui)
+      {
+        var selectedObj = ui.item;
+      }
+    </script>
     <section class="hero set-bg" data-setbg="{% static 'img/hero/hero-bg.jpg'%}">
         <div class="container">
             <div class="row">
@@ -16,7 +32,7 @@
                     <div class="hero__search__form">
                         <form action="/search/" method="post">
                             {% csrf_token %}
-                            <input type="text" placeholder="Aramak istediğiniz kelimeyi yazınız..." name="query">
+                            <input type="text" placeholder="Aramak istediğiniz kelimeyi yazınız..." name="query" id="query">
                             <!--
                             <div class="select__option">
                                 <select>

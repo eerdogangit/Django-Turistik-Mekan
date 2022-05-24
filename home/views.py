@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -106,5 +108,19 @@ def place_search(request):
             }
             return render(request, 'place_search.html', context)
 
+def place_search_auto(request):
+  if request.is_ajax():
+    q = request.GET.get('term', '')
+    places = Place.objects.filter(title__icontains=q)
+    results = []
+    for rs in places:
+      place_json = {}
+      place_json = rs.title
+      results.append(place_json)
+    data = json.dumps(results)
+  else:
+    data = 'fail'
+  mimetype = 'application/json'
+  return HttpResponse(data, mimetype)
 
 
