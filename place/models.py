@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.forms import ModelForm
+from django.urls import reverse
 
 from django.utils.safestring import mark_safe
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -18,7 +19,7 @@ class Category(models.Model):
     image = models.ImageField(blank=True, upload_to='catimages/')
     status = models.CharField(max_length=10, choices=STATUS)
 
-    slug = models.SlugField()
+    slug = models.SlugField(null=False, unique=True)
     parent = models.ForeignKey('self',blank=True, null=True, related_name='children', on_delete=models.CASCADE)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
@@ -29,6 +30,9 @@ class Category(models.Model):
     def image_tag(self):
         return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
     image_tag.short_description = 'Image'
+
+    def get_absolute_url(self):
+        return reverse('category_detail', kwargs={'slug': self.slug})
 
 class Sehir(models.Model):
     STATUS = (
@@ -66,7 +70,7 @@ class Place(models.Model):
     description = models.CharField(max_length=255)
     image = models.ImageField(blank=True, upload_to='placeimages/')
     detail = RichTextUploadingField()
-    slug = models.SlugField(blank=True)
+    slug = models.SlugField(null=False, unique=True)
 
     sehir = models.ForeignKey(Sehir, on_delete=models.CASCADE, blank=True, null=True)
     ulke = models.ForeignKey(Ulke, on_delete=models.CASCADE, blank=True, null=True)
@@ -89,6 +93,9 @@ class Place(models.Model):
         return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
 
     image_tag.short_description = 'Image'
+
+    def get_absolute_url(self):
+        return reverse('place_detail', kwargs={'slug': self.slug})
 
 class Images(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE)

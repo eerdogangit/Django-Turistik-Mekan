@@ -10,6 +10,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'status', 'image_tag']
     readonly_fields = ('image_tag',)
     list_filter = ['status']
+    prepopulated_fields = {'slug': ('title',)}
 admin.site.register(Category, CategoryAdmin)
 
 class PlaceAdmin(admin.ModelAdmin):
@@ -17,6 +18,7 @@ class PlaceAdmin(admin.ModelAdmin):
     readonly_fields = ('image_tag',)
     list_filter = ['status', 'category']
     inlines = [PlaceImageInline]
+    prepopulated_fields = {'slug': ('title',)}
 admin.site.register(Place, PlaceAdmin)
 
 class SehirAdmin(admin.ModelAdmin):
