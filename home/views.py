@@ -7,7 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 # Create your views here.
 #from home.forms import SearchForm, SignUpForm
 from home.models import Setting, ContactFormu, ContactFormMessage
-from place.models import Place, Category, Images
+from place.models import Place, Category, Images, Comment
 
 def index(request):
     setting = Setting.objects.get(pk=1)
@@ -84,9 +84,11 @@ def place_detail(request, id, slug):
     setting = Setting.objects.get(pk=1)
     place = Place.objects.get(pk=id)
     images = Images.objects.filter(place_id=id)
+    comments = Comment.objects.filter(place_id=id, status='True')
     context = {'setting': setting,
                'place': place,
-               'images': images
+               'images': images,
+               'comments': comments,
                }
     return render(request, 'place_detail.html', context)
 

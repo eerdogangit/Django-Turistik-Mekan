@@ -177,80 +177,78 @@
                         </div>
                         <div class="listing__details__comment">
                             <h4>Yorumlar</h4>
+                            {% for rs in comments %}
                             <div class="listing__details__comment__item">
                                 <div class="listing__details__comment__item__pic">
                                     <img src="{% static 'img/listing/details/comment.png '%}" alt="">
                                 </div>
                                 <div class="listing__details__comment__item__text">
                                     <div class="listing__details__comment__item__rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star{% if rs.rate < 1 %}-o empty{% endif %}"></i>
+                                        <i class="fa fa-star{% if rs.rate < 2 %}-o empty{% endif %}"></i>
+                                        <i class="fa fa-star{% if rs.rate < 3 %}-o empty{% endif %}"></i>
+                                        <i class="fa fa-star{% if rs.rate < 4 %}-o empty{% endif %}"></i>
+                                        <i class="fa fa-star{% if rs.rate < 5 %}-o empty{% endif %}"></i>
                                     </div>
-                                    <span>March 22, 2019</span>
-                                    <h5>Marry Jane</h5>
-                                    <p>From ships to airports, museums to burger vans, from revered Michelin star
-                                        establish to the fleeting dynamism of pop-ups.</p>
+                                    <span>{{ rs.create_at}}</span>
+                                    <h5>{{ rs.user.first_name}} {{ rs.user.last_name}}</h5>
+                                    <p><b>{{ rs.subject}}</b><br>
+                                        {{ rs.comment}}</p>
                                     <ul>
-                                        <li><i class="fa fa-hand-o-right"></i> Like</li>
-                                        <li><i class="fa fa-share-square-o"></i> Reply</li>
+
                                     </ul>
                                 </div>
                             </div>
-                            <div class="listing__details__comment__item">
-                                <div class="listing__details__comment__item__pic">
-                                    <img src="{% static 'img/listing/details/comment.png'%}" alt="">
-                                </div>
-                                <div class="listing__details__comment__item__text">
-                                    <div class="listing__details__comment__item__rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <span>March 22, 2019</span>
-                                    <h5>Marry Jane</h5>
-                                    <p>From ships to airports, museums to burger vans, from revered Michelin star
-                                        establish to the fleeting dynamism of pop-ups.</p>
-                                    <ul>
-                                        <li><i class="fa fa-hand-o-right"></i> Like</li>
-                                        <li><i class="fa fa-share-square-o"></i> Reply</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="listing__details__comment__item">
-                                <div class="listing__details__comment__item__pic">
-                                    <img src="{% static 'img/listing/details/comment.png'%}" alt="">
-                                </div>
-                                <div class="listing__details__comment__item__text">
-                                    <div class="listing__details__comment__item__rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <span>March 22, 2019</span>
-                                    <h5>Marry Jane</h5>
-                                    <p>From ships to airports, museums to burger vans, from revered Michelin star
-                                        establish to the fleeting dynamism of pop-ups.</p>
-                                    <ul>
-                                        <li><i class="fa fa-hand-o-right"></i> Like</li>
-                                        <li><i class="fa fa-share-square-o"></i> Reply</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            {% endfor %}
+
                         </div>
                         <div class="listing__details__review">
+                            <h5>
+                            {% if messages %}
+                                {% for message in messages %}
+                                    {{message}}
+                                {% endfor %}
+                            {% endif %}
+                            </h5>
                             <h4>Yorum Ekle</h4>
-                            <form action="#">
-                                <input type="text" placeholder="Ad Soyad">
-                                <input type="text" placeholder="E-Posta Adres">
-                                <textarea placeholder="Yorum"></textarea>
+                            <form action="/place/addcomment/{{ place.id }}" method="post">
+                                {% csrf_token %}
+                                <input type="text" placeholder="Başlık" name="subject" id="id_subject" required>
+                                <textarea placeholder="Yorum" name="comment" id="id_comment" required></textarea>
+                                <div class="filter__tags">
+                                    <h6>Puan Veriniz</h6>
+                                    <label for="star5">
+                                        5 Yıldız
+                                        <input type="radio" id="star5" name="rate" value="5"/>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label for="star4">
+                                        4 Yıldız
+                                        <input type="radio" id="star4" name="rate" value="4"/>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label for="star3">
+                                        3 Yıldız
+                                        <input type="radio" id="star3" name="rate" value="3"/>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label for="star2">
+                                        2 Yıldız
+                                        <input type="radio" id="star2" name="rate" value="2"/>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label for="star1">
+                                        1 Yıldız
+                                        <input type="radio" id="star1" name="rate" value="1"/>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+
+                                {% if user.id is not None %}
                                 <button type="submit" class="site-btn">Gönder</button>
+                                {% else %}
+                                Yorum eklemek için <a href="/login">giriş</a> yapınız.
+                                {% endif %}
                             </form>
                         </div>
                     </div>
