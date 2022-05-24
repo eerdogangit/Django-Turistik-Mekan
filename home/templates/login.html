@@ -1,0 +1,64 @@
+{% extends "homebase.html"%}
+
+{% block title %} İletişim -- {{setting.company}} {% endblock %}
+{% block keywords %} {{setting.keywords}} {% endblock %}
+{% block description %} {{setting.description}} {% endblock %}
+{% block head %}
+    <link rel="icon" href='{{setting.icon.url}}' type="image/x-icon">
+{% endblock %}
+
+{% block content %}
+{% load static %}
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-area set-bg" data-setbg="{% static 'img/breadcrumb/breadcrumb-normal.jpg'%}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Kullanıcı Giriş</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/"><i class="fa fa-home"></i> Ana Sayfa</a>
+                            <span>Kullanıcı Giriş</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+    <!-- Contact Section Begin -->
+    <section class="contact spad">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-4">
+                    <form action="" method="post" class="contact__form">
+                        {% csrf_token %}
+                        <div class="row">
+
+                            <div class="col-lg-12 col-md-12">
+                                <input type="text" placeholder="Kullanıcı Adı" name="username" id="username">
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <input type="password" placeholder="Şifre" name="password" id="password">
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="site-btn">GİRİŞ YAP</button>
+                    </form>
+                    <div class="text-center">
+                        {% if messages %}
+                            {% for message in messages %}
+                                {{message}}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section End -->
+
+{% endblock %}

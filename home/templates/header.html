@@ -42,8 +42,14 @@
                             </ul>
                         </nav>
                         <div class="header__menu__right">
-                            <a href="#" class="primary-btn"><i class="fa fa-plus"></i>Yer Ekle</a>
-                            <a href="#" class="login-btn"><i class="fa fa-user"></i></a>
+                            {% if user.id is not None %}
+                            <a href="/user/" class="primary-btn">{{ user.first_name}}</a>
+                            <a href="/logout" class="primary-btn">Çıkış</a>
+                            <a href="/user/yer_gir" class="primary-btn">Yer Ekle</a>
+                            {% else %}
+                            <a href="/login" class="primary-btn">Giriş</a>
+                            <a href="/signup" class="primary-btn">Kayıt Ol</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

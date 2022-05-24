@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 from home.forms import SearchForm, SignUpForm
-from home.models import Setting, ContactFormu, ContactFormMessage
+from home.models import Setting, ContactFormu, ContactFormMessage, Profile, Faq
 from place.models import Place, Category, Images, Comment
 
 def index(request):
@@ -123,4 +123,54 @@ def place_search_auto(request):
   mimetype = 'application/json'
   return HttpResponse(data, mimetype)
 
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
 
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect('/')
+        else:
+            messages.warning(request, "Login Hatası ! Kullanıcı adı ya da şifre yanlış")
+            return HttpResponseRedirect('/login')
+
+    setting = Setting.objects.get(pk=1)
+    context = {'setting': setting }
+    return render(request, 'login.html', context)
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = request.POST['username']
+            password = request.POST['password1']
+            user = authenticate(request, username=username, password=password)
+            login(request, user)
+            # create data in profile table for user
+            current_user = request.user
+            data = Profile()
+            data.user_id=current_user.id
+            data.image="userimages/avatar.png"
+            data.save()
+            return HttpResponseRedirect('/')
+
+    form = SignUpForm()
+    setting = Setting.objects.get(pk=1)
+    context = {'setting': setting,
+               'form': form
+               }
+    return render(request, 'signup.html', context)
+
+def faq(request):
+    faq = Faq.objects.all()
+    setting = Setting.objects.get(pk=1)
+    context = {'setting': setting,
+               'faq': faq
+               }
+    return render(request, 'faq.html', context)
