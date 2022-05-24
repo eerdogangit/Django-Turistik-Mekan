@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
-#from home.forms import SearchForm, SignUpForm
+from home.forms import SearchForm, SignUpForm
 from home.models import Setting, ContactFormu, ContactFormMessage
 from place.models import Place, Category, Images, Comment
 
@@ -91,6 +91,20 @@ def place_detail(request, id, slug):
                'comments': comments,
                }
     return render(request, 'place_detail.html', context)
+
+def place_search(request):
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            setting = Setting.objects.get(pk=1)
+            category = Category.objects.all()
+            query = form.cleaned_data['query']
+            places = Place.objects.filter(title__icontains=query)
+            context = {'setting': setting,
+                    'places': places,
+                   'category': category
+            }
+            return render(request, 'place_search.html', context)
 
 
 

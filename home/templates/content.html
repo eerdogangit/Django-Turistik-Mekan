@@ -13,7 +13,24 @@
                             {% endfor %}
                         </ul>
                     </div>
-
+                    <div class="hero__search__form">
+                        <form action="/search/" method="post">
+                            {% csrf_token %}
+                            <input type="text" placeholder="Aramak istediğiniz kelimeyi yazınız..." name="query">
+                            <!--
+                            <div class="select__option">
+                                <select>
+                                    <option value="">Choose Categories</option>
+                                </select>
+                            </div>
+                            <div class="select__option">
+                                <select>
+                                    <option value="">Choose Location</option>
+                                </select>
+                            </div>-->
+                            <button type="submit">Ara</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
