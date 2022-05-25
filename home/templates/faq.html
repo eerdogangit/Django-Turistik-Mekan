@@ -1,0 +1,60 @@
+{% extends "homebase.html"%}
+
+{% block title %} Sıkça Sorulan Sorular -- {{setting.company}} {% endblock %}
+{% block keywords %} {{setting.keywords}} {% endblock %}
+{% block description %} {{setting.description}} {% endblock %}
+{% block head %}
+    <link rel="icon" href='{{setting.icon.url}}' type="image/x-icon">
+{% endblock %}
+
+{% block content %}
+{% load static %}
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-area set-bg" data-setbg="{% static 'img/breadcrumb/breadcrumb-normal.jpg'%}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Sıkça Sorulan Sorular</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/"><i class="fa fa-home"></i> Ana Sayfa</a>
+                            <span>Sıkça Sorulan Sorular</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+    <!-- Faq Section Begin -->
+    <section class="about spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="about__text">
+                        {% for rs in faq %}
+<div class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                     <h5 class="panel-title fqa-title" data-toggle="collapse" data-target="#fqa{{ rs.id }}" >
+                                        {{ rs.question }}
+                                     </h5>
+                                </div>
+                                <div id="fqa{{ rs.id }}" class="panel-collapse collapse fqa-body">
+                                    <div class="panel-body">
+                                        {{ rs.answer }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Faq Section End -->
+
+
+{% endblock %}

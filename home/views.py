@@ -168,7 +168,7 @@ def signup_view(request):
     return render(request, 'signup.html', context)
 
 def faq(request):
-    faq = Faq.objects.all()
+    faq = Faq.objects.filter(status='True')
     setting = Setting.objects.get(pk=1)
     context = {'setting': setting,
                'faq': faq

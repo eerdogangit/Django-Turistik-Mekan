@@ -27,13 +27,13 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/user/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/home/templates" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Django\DjangoTuristikMekan\home\templates" />
       <recent name="C:\Django\DjangoTuristikMekan\user\templates" />
       <recent name="C:\Django\DjangoTuristikMekan\user" />
-      <recent name="C:\Django\DjangoTuristikMekan\home\templates" />
       <recent name="C:\Django\DjangoTuristikMekan\place" />
     </key>
   </component>
