@@ -16,12 +16,14 @@ def index(request):
     sliderdata = Place.objects.all()[:3]
     category = Category.objects.all()
     places = Place.objects.filter(status='True').order_by('-id')[:12]
+    placesTarihi = Place.objects.filter(category_id=4).order_by('-id')[:12]
 
     context = {'setting': setting,
                'category': category,
                'page': 'home',
                'sliderdata': sliderdata,
-               'places': places
+               'places': places,
+               'placesTarihi': placesTarihi
                }
     return render(request, 'index.html', context)
 
