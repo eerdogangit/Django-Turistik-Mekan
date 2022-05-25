@@ -152,12 +152,7 @@ def signup_view(request):
             password = request.POST['password1']
             user = authenticate(request, username=username, password=password)
             login(request, user)
-            # create data in profile table for user
-            current_user = request.user
-            data = Profile()
-            data.user_id=current_user.id
-            data.image="userimages/avatar.png"
-            data.save()
+            
             return HttpResponseRedirect('/')
 
     form = SignUpForm()

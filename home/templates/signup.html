@@ -1,6 +1,6 @@
 {% extends "homebase.html"%}
 
-{% block title %} İletişim -- {{setting.company}} {% endblock %}
+{% block title %} Yeni Kullanıcı -- {{setting.company}} {% endblock %}
 {% block keywords %} {{setting.keywords}} {% endblock %}
 {% block description %} {{setting.description}} {% endblock %}
 {% block head %}
@@ -15,10 +15,10 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>İletişim</h2>
+                        <h2>Kullanıcı Kayıt</h2>
                         <div class="breadcrumb__option">
                             <a href="/"><i class="fa fa-home"></i> Ana Sayfa</a>
-                            <span>İletişim</span>
+                            <span>Kullanıcı Kayıt</span>
                         </div>
                     </div>
                 </div>
@@ -29,32 +29,24 @@
     <!-- Contact Section Begin -->
     <section class="contact spad">
         <div class="container">
-
+            
             <div class="row">
-                <div class="col-lg-4 col-md-4">
-                    <div class="contact__widget">
-                        <div class="contact__widget__address">
-                            <h4>İletişim Bilgileri</h4>
-                            <ul>
-                                <li><i class="fa fa-send"></i> {{setting.address | safe}}</li>
-                                <li><i class="fa fa-envelope"></i> {{setting.email | safe}}</li>
-                                <li><i class="fa fa-phone"></i> {{setting.phone | safe}}</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-lg-8 col-md-8">
                     <form action="" method="post" class="contact__form">
                         {% csrf_token %}
                         <div class="row">
                             {% for field in form %}
                                 <div class="col-lg-6 col-md-6">
-                                    {{field}}
+                                        {{field}}
+                                        {% if field.help_text %}
+                                            <small style="color: grey">{{field.help_text}}</small>
+                                        {% endif %}
+                                        {% for error in field.errors %}
+                                            <p style="color: red">{{error}}</p>
+                                        {% endfor %}
                                 </div>
                             {% endfor %}
-                        </div>
-
-                        <button type="submit" class="site-btn">GÖNDER</button>
+                        <button type="submit" class="site-btn">KAYDET</button>
                     </form>
                     <div class="text-center">
                         {% if messages %}
