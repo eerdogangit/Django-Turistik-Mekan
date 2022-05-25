@@ -101,7 +101,7 @@
                                     <div class="listing__item">
                                         <div class="listing__item__pic set-bg" data-setbg="{{ rs.image.url }}">
                                             <img src="{% static 'img/listing/list_icon-1.png'%}" alt="">
-                                            <div class="listing__item__pic__tag">{{categoryData.title}}</div>
+                                            <div class="listing__item__pic__tag">{{rs.category.title}}</div>
                                             <div class="listing__item__pic__btns">
                                                 <a href="/place/{{ rs.id }}/{{ rs.slug }}"><span class="icon_zoom-in_alt"></span></a>
                                                 <a href="#"><span class="icon_heart_alt"></span></a>

@@ -43,7 +43,7 @@
                         </nav>
                         <div class="header__menu__right">
                             {% if user.id is not None %}
-                            <a href="/user/" class="primary-btn">{{ user.first_name}}</a>
+                            <a href="/user/" class="primary-btn">{{ user.first_name}} <img style="height:30px" src="{{ request.user.profile.image.url}}"></a>
                             <a href="/logout" class="primary-btn">Çıkış</a>
                             <a href="/user/yer_gir" class="primary-btn">Yer Ekle</a>
                             {% else %}
