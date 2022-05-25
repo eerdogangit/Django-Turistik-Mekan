@@ -1,0 +1,117 @@
+{% extends "homebase.html"%}
+
+{% block title %} {{profile.user_name}} {% endblock %}
+{% block keywords %} {{setting.keywords}} {% endblock %}
+{% block description %} {{setting.description}} {% endblock %}
+{% block head %}
+    <link rel="icon" href='{{setting.icon.url}}' type="image/x-icon">
+{% endblock %}
+
+{% block content %}
+{% load static %}
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-area set-bg" data-setbg="{% static 'img/breadcrumb/breadcrumb-normal.jpg'%}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Turistik Yer Ekleme Sayfası</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/"><i class="fa fa-home"></i> Ana Sayfa</a>
+                            <span>Turistik Yer Ekleme Sayfası</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+    <!-- Contact Section Begin -->
+    <section class="contact spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <form action="" method="post" class="contact__form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                       <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <input type="text" placeholder="Title" name="title">
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <input type="text" placeholder="Keywords" name="keywords">
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <input type="text" placeholder="Description" name="description">
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <input name="image" type="file" id="wizard-picture">
+                            </div>
+                           <div class="col-lg-12 col-md-12">
+                               <textarea placeholder="Details"  name="detail"></textarea>
+                            </div>
+                           <div class="col-lg-6 col-md-6">
+                                <select name="category" >
+                                    <option selected disabled="true">-- Kategori Seç --</option>
+                                    {% for rs in category %}
+                                    <option value="{{ rs.id }}">{{ rs.title }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                           <div class="col-lg-6 col-md-6">
+                                <select name="sehir" >
+                                    <option selected disabled="true">-- Şehir Seç --</option>
+                                    {% for rs in sehir %}
+                                    <option value="{{ rs.id }}">{{ rs.title }}</option>
+                                    {% endfor %}
+                                </select>
+                           </div>
+                           <div class="col-lg-6 col-md-6">
+                                <select name="ulke">
+                                    <option selected disabled="true">-- Ülke Seç --</option>
+                                    {% for rs in ulke %}
+                                    <option value="{{ rs.id }}">{{ rs.title }}</option>
+                                    {% endfor %}
+                                </select>
+                           </div>
+                           <div class="col-lg-6 col-md-6">
+                                <input type="text" placeholder="Slug" name="slug">
+                           </div>
+
+                        <div class="col-lg-12 col-md-12">
+                               <textarea placeholder="Adres"  name="adres"></textarea>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <input type="text" placeholder="Telefon" name="telefon">
+                        </div>
+                           <div class="col-lg-6 col-md-6">
+                                <input type="text" placeholder="Email" name="email">
+                           </div>
+                        <div class="col-lg-6 col-md-6">
+                            <input type="text" placeholder="Facebook" name="facebook">
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <input type="text" placeholder="Twitter" name="twitter">
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <input type="text" placeholder="Instagram" name="instagram">
+                        </div>
+
+</div>
+                        <button type="submit" class="site-btn">KAYDET</button>
+                    </form>
+                    <div class="text-center">
+                        {% if messages %}
+                            {% for message in messages %}
+                                {{message}}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section End -->
+
+
+{% endblock %}

@@ -41,5 +41,13 @@ class Yer_GirForm(forms.ModelForm):
             'image': FileInput(attrs={'class': 'form-control', 'placeholder': 'image'}),
             'detail': TextInput(attrs={'class': 'form-control', 'placeholder': 'detail'}),
             'category': TextInput(attrs={'class': 'form-control', 'placeholder': 'category'}),
-            'slug': TextInput(attrs={'class': 'form-control', 'placeholder': 'slug'})
+            'slug': TextInput(attrs={'class': 'form-control', 'placeholder': 'slug'}),
+            'sehir': TextInput(attrs={'class': 'form-control', 'placeholder': 'şehir'}),
+            'ulke': TextInput(attrs={'class': 'form-control', 'placeholder': 'Ülke'}),
+            'adres': TextInput(attrs={'class': 'form-control', 'placeholder': 'Adres'}),
+            'telefon': TextInput(attrs={'class': 'form-control', 'placeholder': 'Telefon'}),
+            'email': TextInput(attrs={'class': 'form-control', 'placeholder': 'email'}),
+            'facebook': TextInput(attrs={'class': 'form-control', 'placeholder': 'Face'}),
+            'twitter': TextInput(attrs={'class': 'form-control', 'placeholder': 'Twit'}),
+            'instagram': TextInput(attrs={'class': 'form-control', 'placeholder': 'Instagram'}),
         }

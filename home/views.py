@@ -15,7 +15,7 @@ def index(request):
     setting = Setting.objects.get(pk=1)
     sliderdata = Place.objects.all()[:3]
     category = Category.objects.all()
-    places = Place.objects.all().order_by('-id')[:12]
+    places = Place.objects.filter(status='True').order_by('-id')[:12]
 
     context = {'setting': setting,
                'category': category,
