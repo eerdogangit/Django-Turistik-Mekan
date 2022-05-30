@@ -121,6 +121,73 @@
         </div>
     </section>
     <!-- Most Search Section End -->
+<!-- Listing Details Section Begin -->
+    <section class="listing-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="listing__details__text">
+
+
+
+                        <div class="listing__details__comment">
+                            <h4>Yorumlar</h4>
+                            {% for rs in yorumlar %}
+                            <div class="listing__details__comment__item">
+                                <div class="listing__details__comment__item__pic">
+                                    <img src="{% static 'img/listing/details/comment.png '%}" alt="">
+                                </div>
+                                <div class="listing__details__comment__item__text">
+                                    <div class="listing__details__comment__item__rating">
+                                        <i class="fa fa-star{% if rs.rate < 1 %}-o empty{% endif %}"></i>
+                                        <i class="fa fa-star{% if rs.rate < 2 %}-o empty{% endif %}"></i>
+                                        <i class="fa fa-star{% if rs.rate < 3 %}-o empty{% endif %}"></i>
+                                        <i class="fa fa-star{% if rs.rate < 4 %}-o empty{% endif %}"></i>
+                                        <i class="fa fa-star{% if rs.rate < 5 %}-o empty{% endif %}"></i>
+                                    </div>
+                                    <span>{{ rs.create_at}}</span>
+                                    <h5></h5>
+                                    <p><b>{{ rs.subject}}</b><br>
+                                        {{ rs.comment}}</p>
+                                    <ul>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        <div class="listing__details__review">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="listing__sidebar">
+                        <div class="listing__sidebar__contact">
+
+                            <div class="listing__sidebar__contact__text">
+
+                            </div>
+                        </div>
+                        <!--<div class="listing__sidebar__working__hours">
+                            <h4>Working Hours</h4>
+                            <ul>
+                                <li>Monday <span>09:00 AM - 20:00 PM</span></li>
+                                <li>Tuesday <span>09:00 AM - 20:00 PM</span></li>
+                                <li>Wednesday <span>09:00 AM - 20:00 PM</span></li>
+                                <li>Thursday <span>09:00 AM - 20:00 PM</span></li>
+                                <li>Friday <span class="opening">Opening</span></li>
+                                <li>Saturday <span>09:00 AM - 20:00 PM</span></li>
+                                <li>Saturday <span class="closed">Closed</span></li>
+                            </ul>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Listing Details Section End -->
 
 
 {% endblock %}

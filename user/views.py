@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from home.models import Setting, Profile
 # Create your views here.
-from place.models import Place, Category, Sehir, Ulke
+from place.models import Place, Category, Sehir, Ulke, Comment
 from user.forms import UserUpdateForm, ProfileUpdateForm, Yer_GirForm
 from django.contrib import messages
 
@@ -14,11 +14,13 @@ def index(request):
     category = Category.objects.all()
     current_user = request.user
     profile = Profile.objects.get(user_id=current_user.id)
+    yorumlar = Comment.objects.filter(user_id=current_user.id)
     yerler = Place.objects.filter(user_id=current_user.id, status='True')
     context = {'setting': setting,
                'profile': profile,
                'yerler': yerler,
                'category': category,
+               'yorumlar': yorumlar
                }
     return render(request, 'user_profile.html', context)
 
