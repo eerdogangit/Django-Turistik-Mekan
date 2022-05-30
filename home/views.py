@@ -15,6 +15,7 @@ def index(request):
     setting = Setting.objects.get(pk=1)
     sliderdata = Place.objects.all()[:3]
     category = Category.objects.all()
+    comments = Comment.objects.all()
     places = Place.objects.filter(status='True').order_by('-id')[:12]
     placesTarihi = Place.objects.filter(category_id=4).order_by('-id')[:12]
 
@@ -23,7 +24,8 @@ def index(request):
                'page': 'home',
                'sliderdata': sliderdata,
                'places': places,
-               'placesTarihi': placesTarihi
+               'placesTarihi': placesTarihi,
+               'comments':comments
                }
     return render(request, 'index.html', context)
 
