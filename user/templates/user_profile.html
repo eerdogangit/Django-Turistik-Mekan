@@ -77,6 +77,27 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <table>
+                        <tr>
+                            <td>Kategori</td>
+                            <td>Başlık</td>
+                            <td>İşlemler</td>
+                        </tr>
+                        {% for rs in yerler %}
+                        <tr>
+                            <td>{{rs.category.title}}</td>
+                            <td>{{ rs.title }}</td>
+                            <td><a href="#" >Düzenle </a>
+                                                <a href="/user/yer_sil/{{ rs.id }}/{{ rs.slug }}" onclick="return confirm('are you sure')" >Sil</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-lg-12">
 
